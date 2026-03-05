@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS restaurant.users CASCADE;
+DROP SCHEMA IF EXISTS restaurant CASCADE;

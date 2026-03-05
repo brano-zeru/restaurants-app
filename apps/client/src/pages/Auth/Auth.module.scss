@@ -1,0 +1,33 @@
+@use "../../styles/variables.scss" as *;
+
+.container {
+    display: flex;
+    padding: 3%;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    font-style: italic;
+    text-align: center;
+    width: 50%;
+    min-width: 300px;
+
+    .greetingTitle {
+        color: #000000;
+        font-size: 50px;
+        font-weight: 600;
+    }
+
+    .description {
+        color: grey
+    }
+
+    .menu {
+        display: flex;
+    }
+
+    .separator {
+        border: 1px solid black;
+        margin: 20px 0;
+        width: 100%;
+    }
+}

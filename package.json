@@ -1,0 +1,29 @@
+{
+  "name": "restaurants-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:up": "docker-compose up -d --build && docker-compose logs -f liquibase",
+    "db:stop": "docker-compose stop",
+    "db:down": "docker-compose down",
+    "db:reset": "docker-compose down -v && docker-compose up -d --build",
+    "db:migrate": "docker-compose run --rm liquibase",
+    "db:rollback": "docker-compose run --rm liquibase rollback-count --count",
+    "build": "turbo run build",
+    "dev": "turbo run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "turbo": "^2.8.12"
+  },
+  "packageManager": "npm@10.9.3"
+}

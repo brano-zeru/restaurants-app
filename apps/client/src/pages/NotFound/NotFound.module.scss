@@ -1,0 +1,35 @@
+@use "../../styles/variables" as *;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 50vw;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+}
+
+.error {
+    color: #de6a2b;
+    font-size: 3vw;
+    text-align: center;
+    width: 100%;
+}
+
+.message {
+    color: black;
+    text-align: center;
+    font-style: italic; 
+    font-weight: bold;
+    font-size: 11vw;
+    width: 100%;
+    font-family: 'Playfair Display, serif (italic)';
+}
+
+.submessage {
+    color: hsl(0 0% 7.1%);
+    opacity: 0.5;
+    font-style: italic;
+}

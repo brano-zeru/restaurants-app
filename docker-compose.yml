@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:15
+    container_name: restaurant-db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 2s
+      timeout: 2s
+      retries: 5
+
+  liquibase:
+    build: .
+    container_name: liquibase-service
+    entrypoint: 
+      - /liquibase/liquibase
+      - --changelog-file=changelog/changelog.xml
+      - --url=jdbc:postgresql://db:5432/${DB_NAME}
+      - --username=${DB_USER}
+      - --password=${DB_PASSWORD}
+    command: ["update"]
+    volumes:
+      - ./packages/liquibase:/liquibase/changelog
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db_data:

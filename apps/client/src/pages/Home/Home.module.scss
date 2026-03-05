@@ -1,0 +1,24 @@
+@use "../../styles/variables" as *;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    font-size: 1.5vw;
+}
+
+.navbar {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    background-color: $primary-color;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+.username { 
+    color: black;
+    font-weight: bold;
+}
