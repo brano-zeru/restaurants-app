@@ -38,7 +38,6 @@ export const InputField: FC<InputFieldProps> = ({
         <div className={styles.fieldContainer}>
             <div className={styles.labelContainer}>
                 <label className={styles.label}>{label}</label>
-                {error && <label className={styles.error}>{error.message}</label>}
             </div>
             <div className = {styles.inputContainer} style={error && onErrorStyle}>
                 <input 
@@ -50,9 +49,10 @@ export const InputField: FC<InputFieldProps> = ({
                     name={name}
                     type={type}
                     style={style}
-                />
+                    />
                 {icon}
             </div>
+        <label className={styles.error}>{error?.message}</label>
         </div>
     )
 }
