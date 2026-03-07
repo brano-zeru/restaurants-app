@@ -1,5 +1,5 @@
 import { AuthProvider } from "./contexts/AuthContext/AuthProvider"
-import { PagesRouter } from "./PagesRouter/PagesRouter"
+import { PagesRouter } from "./PagesRouter"
 import "./styles/main.scss"
 
 function App() {

@@ -32,6 +32,9 @@ export const Signup: FC = () => {
     const onSubmit = async (data: SignupFormValues) => {
         const {username, email, password} = data
         const response = await api().signup(username, email, password)
+        if (response) {
+            navigate(getPath(Pages.LOGIN))
+        }
         console.log(response)
     }
 
@@ -54,7 +57,6 @@ export const Signup: FC = () => {
                         label="Username"
                         placeholder="Enter username"
                         error={error}
-                        style={error && {borderColor: "red"}}
                     />
                 )}
             />,
@@ -69,7 +71,6 @@ export const Signup: FC = () => {
                         label="Email"
                         placeholder="Enter email"
                         error={error}
-                        style={error && {borderColor: "red"}}
                     />
                 )}
             />,
@@ -84,7 +85,6 @@ export const Signup: FC = () => {
                         label="Password"
                         placeholder="Enter password"
                         error={error}
-                        style={error && {borderColor: "red"}}
                     />
                 )}
             />,
@@ -104,7 +104,6 @@ export const Signup: FC = () => {
                         label="Confirm Password"
                         placeholder="Enter confirm password"
                         error={error}
-                        style={error && {borderColor: "red"}}
                     />
                 )}
             />
@@ -136,7 +135,7 @@ export const Signup: FC = () => {
             }
             footer={
                 <Button
-                    text=" Back to home"
+                    text="Back"
                     type="button"
                     onClick={() => navigate(getPath(Pages.AUTH))} 
                     style={{

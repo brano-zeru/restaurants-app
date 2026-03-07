@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import arrowLeftIcon from "../../assets/icons/arrow-left.svg";
 import { Button } from "../../components/Button";
 import { Form } from "../../components/Form";
-import { InputField } from "../../components/InputField";
+import { InputField, PasswordField } from "../../components/InputField";
 import { Pages } from "../../consts";
 import { getPath } from "../../routes";
 import { api } from "../../api";
 import type { LoginRequestDTO } from "@restaurants-app/types";
 import { useAuth } from "../../contexts/AuthContext/useAuth";
+import hiddenPasswordIcon from '../../assets/icons/eye-password-hide.svg'
+import visiblePasswordIcon from '../../assets/icons/eye-password-visible.svg'
 
 export const Login: FC = () => {
     const navigate = useNavigate();
@@ -57,13 +59,14 @@ export const Login: FC = () => {
             control={control}
             rules={{required: 'This field is required'}}
             render={({ field, fieldState: {error} }) => (
-                <InputField
+                <PasswordField
                     {...field}
-                    type="password"
                     label="Password"
                     placeholder="Enter password" 
                     error={error}
                     style={error && {borderColor: "red"}}
+                    hiddenIconSrc={hiddenPasswordIcon}
+                    visibleIconSrc={visiblePasswordIcon}
                 />
             )}
         />
@@ -94,7 +97,7 @@ export const Login: FC = () => {
             }
             footer={
                 <Button
-                    text=" Back to home"
+                    text="Back"
                     type="button"
                     onClick={() => navigate(getPath(Pages.AUTH))} 
                     style={{

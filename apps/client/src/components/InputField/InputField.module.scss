@@ -12,9 +12,9 @@
         justify-content: space-between;
         align-items: center;
         color: $primary-color;
+        font-size: 90%;
 
         .label {
-            font-size: 16px;
             font-weight: 400;
             height: auto;
             color: #333;
@@ -28,14 +28,27 @@
             // text-overflow: ellipsis;
             // width: ;
         }
+
     }
 
-    .input {
-        padding: 10px;
-        background-color: transparent;
+    .inputContainer {
+        display: flex;
+        align-items: center;
         border-radius: 5px;
         border: 1px solid white;
-        color: black;
-        outline: none;
+        padding: 8px;
+        
+        .input {
+            background-color: transparent;
+            outline: none;
+            border: none;
+            width: 100%;
+            color: black;
+        }
+
+        .eyeIcon {
+            width: 16px;
+            height: 16px;
+        }
     }
 }

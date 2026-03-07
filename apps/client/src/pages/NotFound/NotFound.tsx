@@ -1,9 +1,12 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./NotFound.module.scss"
 import { Button } from "../../components/Button";
+import { Pages } from "../../consts";
+import { getPath } from "../../routes";
 
 export const NotFound = () => {
     const {pathname} = useLocation()
+    const navigate = useNavigate()
 
     return (
         <div className={styles.container}>
@@ -14,7 +17,7 @@ export const NotFound = () => {
             </div>
             <Button
                 text="Back to home"
-                onClick={() => {}}
+                onClick={() => navigate(getPath(Pages.HOME))}
                 type="button"
                 style={{
                     

@@ -9,7 +9,7 @@ export const api = (): Api => {
     }
 
     const signup = async (username: string, email: string, password: string) => {
-        const response = await fetchApi<UserDTO>('/auth/signup', 'POST', {
+        const response = await fetchApi<{message: string, user: UserDTO | null}>('/auth/signup', 'POST', {
             username,
             email,
             password

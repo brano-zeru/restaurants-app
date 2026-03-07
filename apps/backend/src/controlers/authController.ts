@@ -14,7 +14,7 @@ export const authController = () => {
     const signup = async (req: Request, res: Response) => {
         const {username, email, password} = req.body
         await authService().signup(username, email, password)
-        return await res.json({message: 'Signup successful'})
+        return await res.status(201).json({message: 'Signup successful'})
     }
 
     const signin = async (req: Request, res: Response) => {
@@ -22,15 +22,10 @@ export const authController = () => {
             const {identifier, password} = req.body
             const user = await authService().signin(identifier, password)
 
-            const {secret, options, name: jwtTokenName} = appConfig.jwt
+            const {secret, options} = appConfig.jwt
+            const {id, username, email} = user
 
-            const payload = { 
-                id: user.id, 
-                username: user.username, 
-                email: user.email 
-            };
-
-            const token = jwt.sign(payload, secret, options)
+            const token = jwt.sign({id, username, email}, secret, options)
 
             attachCookie(res, token)
 

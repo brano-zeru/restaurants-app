@@ -3,7 +3,7 @@
 .buttonContainer {
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding: 5px 0;
     border-radius: 5px;
 
     .button {   
@@ -13,8 +13,4 @@
         border: none;
         padding: 10px;
     }
-    
-    .icon {
-        height: 15px;
-    }   
 }

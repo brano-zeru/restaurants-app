@@ -1,5 +1,6 @@
 import { useMemo, useState, type FC } from "react"
 import styles from "./Button.module.scss"
+import { Icon } from "../Icon"
 
 interface BaseButtonProps {
     text: string
@@ -54,12 +55,10 @@ export const Button: FC<ButtonProps> = ({
                 className={styles.button} 
                 style={{...buttonStyle, ...(isHovered && hoverStyle), ...(isDisabled && disabledStyle)}}
             >
-                {icon && 
-                    <img 
-                        src={icon} 
-                        alt="icon" 
-                        className={styles.icon} 
-                        style={iconStyle} 
+                {icon &&
+                    <Icon 
+                        src={icon}
+                        style={iconStyle}
                     />}
                 {text}  
             </button>
