@@ -13,8 +13,8 @@ export const authController = () => {
 
     const signup = async (req: Request, res: Response) => {
         const {username, email, password} = req.body
-        await authService().signup(username, email, password)
-        return await res.status(201).json({message: 'Signup successful'})
+        const user = await authService().signup(username, email, password)
+        return await res.status(201).json({user, message: 'Signup successful'})
     }
 
     const signin = async (req: Request, res: Response) => {
@@ -36,12 +36,6 @@ export const authController = () => {
         }
     }
 
-    const logout = async (req: Request, res: Response) => {
-        const {name: jwtTokenName} = appConfig.jwt
-        res.clearCookie(jwtTokenName)
-        return res.json({message: 'Logout successful'})
-    }
-
     const attachCookie = (res: Response, token: string) => {
         const {name: jwtTokenName} = appConfig.jwt
         res.cookie(jwtTokenName, token, {
@@ -50,6 +44,12 @@ export const authController = () => {
             sameSite: 'strict',
             maxAge: 24 * 60 * 60 * 1000
         })
+    }
+
+    const logout = async (req: Request, res: Response) => {
+        const {name: jwtTokenName} = appConfig.jwt
+        res.clearCookie(jwtTokenName)
+        return res.json({message: 'Logout successful'})
     }
 
     return {

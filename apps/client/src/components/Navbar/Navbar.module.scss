@@ -7,18 +7,18 @@
     padding: 10px;
     background-color: $primary-color;
     opacity: 0.9;
-    font-style: italic;
-}
-
-.greetingTitle {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 16px;
-    text-align: center;
-}
-
-.username { 
-    color: black;
-    font-weight: bold;
+    
+    .greetingTitle {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    .username { 
+        color: black;
+        font-weight: 600;
+        font-style: italic;
+    }
 }

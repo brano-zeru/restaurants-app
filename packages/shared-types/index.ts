@@ -5,7 +5,7 @@ export interface UserDTO {
 }
 
 export interface UserResponseDTO {
-    user: Omit<UserDTO, 'password'> & {
+    user: UserDTO & {
         iat: number,
         exp: number,
     }

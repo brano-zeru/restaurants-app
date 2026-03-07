@@ -14,9 +14,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({children}) => {
     const checkAuth = useCallback(async () => {
         setIsLoading(true);
         try {
-            const {user, message} = await api().me();
+            const {user} = await api().me();
             setUser(user);
-            console.log(message)
         } catch (error) {
             setUser(null);
         } finally {

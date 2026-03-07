@@ -8,6 +8,7 @@ import arrowLeftIcon from '../../assets/icons/arrow-left.svg'
 import { api } from "../../api";
 import { getPath } from "../../routes";
 import { Pages } from "../../consts";
+import { useAuth } from "../../contexts/AuthContext/useAuth";
 
 interface SignupFormValues {
     username: string;
@@ -18,6 +19,7 @@ interface SignupFormValues {
 
 export const Signup: FC = () => {
     const navigate = useNavigate()
+    const {setUser} = useAuth()
 
     const { handleSubmit, control, watch, formState: {isDirty, isValid} } = useForm<SignupFormValues>({
         mode: "onTouched",
@@ -31,11 +33,12 @@ export const Signup: FC = () => {
 
     const onSubmit = async (data: SignupFormValues) => {
         const {username, email, password} = data
-        const response = await api().signup(username, email, password)
-        if (response) {
-            navigate(getPath(Pages.LOGIN))
+        const {user, message} = await api().signup(username, email, password)
+        if (user) {
+            console.log(message)
+            setUser(user)   
+            navigate(getPath(Pages.HOME))
         }
-        console.log(response)
     }
 
     const fields = useMemo(() => {

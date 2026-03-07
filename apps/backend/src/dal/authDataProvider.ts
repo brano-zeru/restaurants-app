@@ -5,7 +5,7 @@ export const authDataProvider = () => {
         try {
             const result = await query(
                 `INSERT INTO restaurant.users (username, email, password) 
-                VALUES ($1, $2, $3) RETURNING *;`
+                VALUES ($1, $2, $3) RETURNING id, username, email;`
             , [username, email, password])
             return result.rows[0]
         } catch (error) {

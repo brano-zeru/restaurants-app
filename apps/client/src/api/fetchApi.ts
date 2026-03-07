@@ -12,8 +12,5 @@ export const fetchApi = async <T> (input: string, method: 'GET' | 'POST' | 'PUT'
         ...(body ? { body: JSON.stringify(body) } : {})
     })
 
-    if (response.status === 401) { 
-        localStorage.removeItem('token')
-    }
     return response.json() as T
 }
