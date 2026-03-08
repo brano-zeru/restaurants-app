@@ -10,4 +10,10 @@
             <sqlFile path="rollbacks/001-create-users-table-rollback.sql" relativeToChangelogFile="true"/>
         </rollback>
     </changeSet>
+    <changeSet id="002" author="brano">
+        <sqlFile path="updates/002-change-id-to-uuid.sql" relativeToChangelogFile="true"/>
+        <rollback>
+            <sqlFile path="rollbacks/002-change-id-to-uuid-rollback.sql" relativeToChangelogFile="true"/>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>
