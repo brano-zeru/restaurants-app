@@ -1,3 +1,4 @@
+import { FailedLoginError } from "@restaurants-app/types"
 import { authDataProvider } from "../dal/authDataProvider"
 
 export const authService = () => {
@@ -6,7 +7,11 @@ export const authService = () => {
     }
 
     const signin = async (username: string, password: string) => {
-        return authDataProvider().signin(username, password)
+        const user = await authDataProvider().signin(username, password)
+        if (!user) {
+            throw new FailedLoginError()
+        }
+        return user
     }
 
     return {

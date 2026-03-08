@@ -1,3 +1,4 @@
+import { ErrorRequestHandler, RequestHandler, Router } from "express"
 import { Secret, SignOptions } from "jsonwebtoken"
 
 export interface AppConfig {
@@ -14,4 +15,15 @@ export interface AppConfig {
         secret: Secret,
         options: SignOptions
     }
+}
+
+export type Route = {
+    key: string,
+    path: string,
+    route: Router
+}
+
+export type Middleware = {
+    key: string,
+    middleware: RequestHandler | ErrorRequestHandler
 }

@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import { authService } from "../services/authService"
 import jwt from "jsonwebtoken"
 import { appConfig } from "../config"
+import { StatusCodes } from "http-status-codes"
 
 export const authController = () => {
     const me = async (req: Request, res: Response) => {
@@ -14,26 +15,21 @@ export const authController = () => {
     const signup = async (req: Request, res: Response) => {
         const {username, email, password} = req.body
         const user = await authService().signup(username, email, password)
-        return await res.status(201).json({user, message: 'Signup successful'})
+        return await res.status(StatusCodes.CREATED).json({user, message: 'Signup successful'})
     }
 
     const signin = async (req: Request, res: Response) => {
-        try {
-            const {identifier, password} = req.body
-            const user = await authService().signin(identifier, password)
+        const {identifier, password} = req.body
+        const user = await authService().signin(identifier, password)
 
-            const {secret, options} = appConfig.jwt
-            const {id, username, email} = user
+        const {secret, options} = appConfig.jwt
+        const {id, username, email} = user
 
-            const token = jwt.sign({id, username, email}, secret, options)
+        const token = jwt.sign({id, username, email}, secret, options)
 
-            attachCookie(res, token)
+        attachCookie(res, token)
 
-            return res.json({message: 'Signin successful', user})
-        } catch (error) {
-            console.error('Error in authController.signin:', error)
-            return res.status(401).json({message: 'Invalid credentials', user: null})
-        }
+        return res.json({message: 'Signin successful', user})
     }
 
     const attachCookie = (res: Response, token: string) => {

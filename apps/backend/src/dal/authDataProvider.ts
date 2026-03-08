@@ -20,9 +20,6 @@ export const authDataProvider = () => {
                 `SELECT id, username, email FROM restaurant.users WHERE (username = $1 OR email = $1)
                 AND password = $2;`
             , [username, password])
-            if (result.rows.length === 0) {
-                throw new Error('User not found')
-            }
             return result.rows[0]
         } catch (error) {
             console.error('Error in authDataProvider.signin:', error)

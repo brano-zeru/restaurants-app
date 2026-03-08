@@ -1,19 +1,10 @@
-import express from 'express'
-import authRouter from './routes/authRouter'
-import cors from 'cors'
-import { appConfig } from './config'
-import cookieParser from 'cookie-parser'
+import { Application } from 'express'
+import { initMiddlewares, middlewareKeys } from './middlewares'
+import { initRoutes } from './routes'
+import { Middleware, Route } from './types'
 
-const app = express()
-
-app.use(express.json())
-app.use(cookieParser())
-app.use(cors({
-    origin: appConfig.client.serverUrl,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-}))
-app.use('/auth', authRouter)
-
-export {app}
+export const initApp = (app: Application, routes: Route[], middlewares: Middleware[]) => {
+    initMiddlewares(app, middlewares.filter(({key}) => key !== middlewareKeys.ERROR_MIDDLEWARE))
+    initRoutes(app, routes)
+    initMiddlewares(app, middlewares.filter(({key}) => key === middlewareKeys.ERROR_MIDDLEWARE))
+}

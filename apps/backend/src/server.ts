@@ -1,13 +1,19 @@
 import fs from 'fs'
 import https from 'https'
+import express from 'express'
 import { appConfig } from "./config";
-import { app } from './initApp';
+import { initApp } from './initApp';
+import { routes } from './routes';
+import { middlewares } from './middlewares';
 
 const {
   port: PORT = 3000,
   cert: CERT = '',
   key: KEY = ''
 } = appConfig.server
+
+const app = express()
+initApp(app, routes, middlewares)
 
 if (KEY && CERT) {
   const options = {
