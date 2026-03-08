@@ -9,6 +9,7 @@ import { api } from "../../api";
 import { getPath } from "../../routes";
 import { Pages } from "../../consts";
 import { useAuth } from "../../contexts/AuthContext/useAuth";
+import isEmail from "validator/lib/isEmail";
 
 interface SignupFormValues {
     username: string;
@@ -67,7 +68,11 @@ export const Signup: FC = () => {
                 key="email"
                 name="email"
                 control={control}
-                rules={commonFieldRules}
+                rules={{...commonFieldRules, 
+                    validate: (value) => {
+                        return isEmail(value) || `${value} is not a valid email`
+                    }
+                }}
                 render={({ field, fieldState: {error} }) => (
                     <InputField
                         {...field}
