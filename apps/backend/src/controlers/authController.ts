@@ -46,7 +46,7 @@ export const authController = () => {
         })
     }
 
-    const logout = async (req: Request, res: Response) => {
+    const logout = async (_req: Request, res: Response) => {
         const {name: jwtTokenName} = appConfig.jwt
         res.clearCookie(jwtTokenName)
         return res.json({message: 'Logout successful'})

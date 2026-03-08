@@ -14,7 +14,7 @@ export const appConfig: AppConfig = {
         serverUrl: process.env.CLIENT_SERVER_URL || ''
     },
     jwt: {
-        name: process.env.JWT_COOKIE_NAME || 'token',
+        name: process.env.JWT_COOKIE_NAME || '',
         secret: process.env.JWT_SECRET || '',
         options: {
             expiresIn: process.env.JWT_EXPIRES_IN
