@@ -14,12 +14,13 @@ export const authDataProvider = () => {
         }
     }
 
-    const signin = async (username: string, password: string) => {
+    const signin = async (identifier: string, password: string) => {
         try {
             const result = await query(
-                `SELECT id, username, email FROM restaurant.users WHERE (username = $1 OR email = $1)
+                `SELECT id, username, email FROM restaurant.users 
+                WHERE (username = $1 OR email = $1)
                 AND password = $2;`
-            , [username, password])
+            , [identifier, password])
             return result.rows[0]
         } catch (error) {
             console.error('Error in authDataProvider.signin:', error)

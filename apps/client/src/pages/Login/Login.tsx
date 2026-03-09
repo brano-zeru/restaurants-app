@@ -27,8 +27,7 @@ export const Login: FC = () => {
 
     const onSubmit = async (data: LoginRequestDTO) => {
         try {
-            const {user, message} = await api().signin(data)
-            console.log(message)
+            const {user} = await api().signin(data)
             if (!user) return
             setUser(user)
             navigate(getPath(Pages.HOME))

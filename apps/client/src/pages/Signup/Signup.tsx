@@ -34,9 +34,8 @@ export const Signup: FC = () => {
 
     const onSubmit = async (data: SignupFormValues) => {
         const {username, email, password} = data
-        const {user, message} = await api().signup(username, email, password)
+        const {user} = await api().signup(username, email, password)
         if (user) {
-            console.log(message)
             setUser(user)   
             navigate(getPath(Pages.HOME))
         }

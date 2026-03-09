@@ -27,7 +27,6 @@ export const api = (): Api => {
 
     const logout = async () => {
         const response = await fetchApi<{message: string}>('/auth/logout', 'POST')
-        console.log(response.message)
         return response
     }
 

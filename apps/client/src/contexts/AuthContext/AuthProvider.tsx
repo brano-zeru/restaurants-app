@@ -24,8 +24,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({children}) => {
     }, []);
 
     const logout = useCallback(async () => {
-        const {message} = await api().logout()
-        console.log(message)
+        await api().logout()
         setUser(null);
     }, []);
 
