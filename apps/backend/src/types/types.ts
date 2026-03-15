@@ -25,5 +25,6 @@ export type Route = {
 
 export type Middleware = {
     key: string,
-    middleware: RequestHandler | ErrorRequestHandler
+    middleware: RequestHandler | ErrorRequestHandler,
+    isPostRoutes?: boolean
 }

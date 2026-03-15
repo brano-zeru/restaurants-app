@@ -1,9 +1,8 @@
-import { appConfig } from "../config";
 import { Middleware } from "../types";
 import { errorMiddleware } from "./error.middleware";
 import cookieParser from "cookie-parser";
 import express from "express";
-import cors from "cors";
+import { corsMiddleware } from "./cors.middleware";
 
 export const middlewareKeys = {
     JSON_PARSER: 'json_parser',
@@ -15,11 +14,6 @@ export const middlewareKeys = {
 export const middlewares: Middleware[] = [
     {key: middlewareKeys.JSON_PARSER, middleware: express.json()},
     {key: middlewareKeys.COOKIE_PARSER, middleware: cookieParser()},
-    {key: middlewareKeys.CORS, middleware: cors({
-        origin: appConfig.client.serverUrl,
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
-        credentials: true
-    })},
-    {key: middlewareKeys.ERROR_MIDDLEWARE, middleware: errorMiddleware}
+    {key: middlewareKeys.CORS, middleware: corsMiddleware()},
+    {key: middlewareKeys.ERROR_MIDDLEWARE, middleware: errorMiddleware, isPostRoutes: true}
 ]

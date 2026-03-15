@@ -1,4 +1,4 @@
-import { Application, ErrorRequestHandler, RequestHandler } from "express";
+import { Application } from "express";
 import { Middleware } from "../types";
 
 export const initMiddlewares = (app: Application, middlewares: Middleware[]) => 
