@@ -7,6 +7,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     const token = req.cookies[appConfig.jwt.name]
     
     if (!token) {
+        // TODO: handle refresh token 
         return res.status(401).json({message: 'you are not logged in'}) 
     }
 
