@@ -21,11 +21,12 @@ export class DataProviderFactory {
     }
 
     private setProvider(providerKey: keyof ProvidersMap) {
-        const provider = this.creatorMapper[providerKey]()
-        this.instances.set(providerKey, provider)
+        const creator = this.creatorMapper[providerKey]
+        const instance = creator()
+        this.instances.set(providerKey, instance)
     }
 
-    public getProvider<K extends keyof ProvidersMap> (providerKey: keyof ProvidersMap): ProvidersMap[K] {
+    public getProvider<K extends keyof ProvidersMap> (providerKey: K): ProvidersMap[K] {
         let providerInstance = this.instances.get(providerKey)
 
         if (!providerInstance) {
