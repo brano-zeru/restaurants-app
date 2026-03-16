@@ -1,10 +1,13 @@
 import { Request, Response } from "express"
-import { authService } from "../services/authService"
+import { getAuthService } from "../services/authService"
 import jwt from "jsonwebtoken"
 import { appConfig } from "../config"
 import { StatusCodes } from "http-status-codes"
+import { DataProviderFactory } from "../dal/dataFactory"
 
-export const authController = () => {
+export const authController = (dataFactory: DataProviderFactory) => {
+    const authService = getAuthService(dataFactory)
+
     const me = async (req: Request, res: Response) => {
         return res.json({
             user: req.user,
@@ -14,13 +17,13 @@ export const authController = () => {
 
     const signup = async (req: Request, res: Response) => {
         const {username, email, password} = req.body
-        const user = await authService().signup(username, email, password)
+        const user = await authService.signup(username, email, password)
         return await res.status(StatusCodes.CREATED).json({user, message: 'Signup successful'})
     }
 
     const signin = async (req: Request, res: Response) => {
         const {identifier, password} = req.body
-        const user = await authService().signin(identifier, password)
+        const user = await authService.signin(identifier, password)
 
         const {secret, options} = appConfig.jwt
         const {id, username, email} = user

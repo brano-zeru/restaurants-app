@@ -12,8 +12,21 @@ export const middlewareKeys = {
 } as const
 
 export const middlewares: Middleware[] = [
-    {key: middlewareKeys.JSON_PARSER, middleware: express.json()},
-    {key: middlewareKeys.COOKIE_PARSER, middleware: cookieParser()},
-    {key: middlewareKeys.CORS, middleware: corsMiddleware()},
-    {key: middlewareKeys.ERROR_MIDDLEWARE, middleware: errorMiddleware, isPostRoutes: true}
+    {
+        key: middlewareKeys.JSON_PARSER, 
+        middleware: express.json()
+    },
+    {
+        key: middlewareKeys.COOKIE_PARSER, 
+        middleware: cookieParser()
+    },
+    {
+        key: middlewareKeys.CORS, 
+        middleware: corsMiddleware()
+    },
+    {
+        key: middlewareKeys.ERROR_MIDDLEWARE, 
+        middleware: errorMiddleware,
+        isPostRoutes: true
+    }
 ]
